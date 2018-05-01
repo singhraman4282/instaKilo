@@ -19,6 +19,10 @@
 @property (nonatomic) NSMutableArray *photoArray;
 @property (nonatomic) NSMutableArray *categorizedArray;
 @property (nonatomic) NSMutableArray *headerCatsArray;
+@property (strong, nonatomic) IBOutlet UIView *deleteView;
+@property (nonatomic) photoObject *delPhoto;
+@property (strong, nonatomic) IBOutlet UIImageView *deleteViewImage;
+@property (strong, nonatomic) IBOutlet UIVisualEffectView *blur;
 
 
 @end
@@ -28,7 +32,8 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.deleteView.hidden = true;
+    self.blur.hidden = true;
     
     
     photoObject *newPhotoImage = [photoObject new];
@@ -57,33 +62,16 @@ static NSString * const reuseIdentifier = @"Cell";
                 newPhotoImage.photoLocation = @"Vancouver";
                 newPhotoImage.photoCategory = @"Weird image";
             }
-            
-            
             [self.photoArray addObject:newPhotoImage];
         }//forLoop
         NSLog(@"total photos is %d", self.photoArray.count);
-        
-        
     }//if photoArray is empty
-    
-    
     UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
     collectionViewLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     self.segControl.selectedSegmentIndex = 0;
-    
 }//viewDidLoad
 
-#pragma mark <UICollectionViewDataSource>
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     if (self.segControl.selectedSegmentIndex == 1) {
@@ -146,22 +134,18 @@ static NSString * const reuseIdentifier = @"Cell";
             case 0:
             {
                 cell.imageView.contentMode = UIViewContentModeTop;
-                NSLog(@"%d", randomContentMode);
             }
             case 1:
             {
                 cell.imageView.contentMode = UIViewContentModeLeft;
-                NSLog(@"%d", randomContentMode);
             }
             case 2:
             {
                 cell.imageView.contentMode = UIViewContentModeRight;
-                NSLog(@"%d", randomContentMode);
             }
             case 3:
             {
                 cell.imageView.contentMode = UIViewContentModeBottom;
-                NSLog(@"%d", randomContentMode);
             }
                 
                 
@@ -184,22 +168,18 @@ static NSString * const reuseIdentifier = @"Cell";
                 case 0:
                 {
                     cell.imageView.contentMode = UIViewContentModeTop;
-                    NSLog(@"%d", randomContentMode);
                 }
                 case 1:
                 {
                     cell.imageView.contentMode = UIViewContentModeLeft;
-                    NSLog(@"%d", randomContentMode);
                 }
                 case 2:
                 {
                     cell.imageView.contentMode = UIViewContentModeRight;
-                    NSLog(@"%d", randomContentMode);
                 }
                 case 3:
                 {
                     cell.imageView.contentMode = UIViewContentModeBottom;
-                    NSLog(@"%d", randomContentMode);
                 }
                     
                     
@@ -210,6 +190,10 @@ static NSString * const reuseIdentifier = @"Cell";
             cell.locationLabel.text = newPhotoObject.photoLocation;
             cell.categoryLabel.text = newPhotoObject.photoCategory;
         }//section0
+        
+            
+            
+            
         if (indexPath.section == 1) {
             thisArray = [self.categorizedArray objectAtIndex:1];
             photoObject *newPhotoObject = [thisArray objectAtIndex:indexPath.row];
@@ -218,26 +202,20 @@ static NSString * const reuseIdentifier = @"Cell";
             switch (randomContentMode) {
                 case 0:
                 {
-            cell.imageView.contentMode = UIViewContentModeTop;
-                    NSLog(@"%d", randomContentMode);
+                    cell.imageView.contentMode = UIViewContentModeTop;
                 }
                 case 1:
                 {
                     cell.imageView.contentMode = UIViewContentModeLeft;
-                    NSLog(@"%d", randomContentMode);
                 }
                 case 2:
                 {
                     cell.imageView.contentMode = UIViewContentModeRight;
-                    NSLog(@"%d", randomContentMode);
                 }
                 case 3:
                 {
                     cell.imageView.contentMode = UIViewContentModeBottom;
-                    NSLog(@"%d", randomContentMode);
                 }
-                    
-                    
                 default:
                     break;
                     
@@ -280,28 +258,75 @@ static NSString * const reuseIdentifier = @"Cell";
     if (kind == UICollectionElementKindSectionHeader) {
         HeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
         if (self.headerCatsArray.count > 0) {
-        
-        NSString *title = [self.headerCatsArray objectAtIndex:indexPath.section];
-        
-        
-        headerView.headerLabel.text = title;
+            NSString *title = [self.headerCatsArray objectAtIndex:indexPath.section];
+            headerView.headerLabel.text = title;
         } else {
             headerView.headerLabel.text = @"";
         }
-        
         reusableview = headerView;
     }
-    
-    
-    
     return reusableview;
-    
-    
 }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.delPhoto = [photoObject new];
+    if (self.segControl.selectedSegmentIndex == 0) {
+        self.delPhoto = [self.photoArray objectAtIndex:indexPath.row];
+        NSLog(@"PhotoName%@", self.delPhoto.photoName);
+        
+    }//0
+    
+    else
+    {
+        NSMutableArray *thisArray = [self.categorizedArray objectAtIndex:indexPath.section];
+        self.delPhoto = [thisArray objectAtIndex:indexPath.row];
+        NSLog(@"PhotoName%@", self.delPhoto.photoName);
+        
+        
+        
+        
+        
+        //        [thisArray removeObject:thisPhoto];
+        //        [self.photoArray removeObject:thisPhoto];
+        //        [self.collectionView deselectItemAtIndexPath:indexPath animated:true];
+        //        [self.collectionView reloadData];
+        
+    }//else
+    
+    self.deleteView.hidden = false;
+    self.blur.hidden = false;
+    self.deleteViewImage.image = [UIImage imageNamed:self.delPhoto.photoName];
+    
+}//didSelectItem
+
+- (IBAction)deleteButton:(UIButton *)sender {
+    
+    if (self.segControl.selectedSegmentIndex == 0) {
+        [self.photoArray removeObject:self.delPhoto];
+        
+    } else {
+        for (int i=0;i<self.categorizedArray.count;i++) {
+            NSMutableArray *thisArray = [self.categorizedArray objectAtIndex:i];
+            if ([thisArray containsObject:self.delPhoto]) {
+                [thisArray removeObject:self.delPhoto];
+            }
+        }//for
+        [self.photoArray removeObject:self.delPhoto];
+    }//else
+    
+    [self.collectionView reloadData];
+    self.deleteView.hidden = true;
+    self.blur.hidden = true;
+}//deleteButton
 
 
 
-
+- (IBAction)cancelButton:(UIButton *)sender {
+    
+    self.deleteView.hidden = true;
+    self.blur.hidden = true;
+    
+}//cancelButton
 
 
 
@@ -341,7 +366,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.categorizedArray = [myArrayConverter categorizeByCategory:self.photoArray];
         [self.collectionView reloadData];
         NSMutableArray *thisArray = [self.categorizedArray objectAtIndex:0];
-       
+        
     }//2
     
 }//segClicked

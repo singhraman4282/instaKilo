@@ -102,12 +102,92 @@
                                     <outlet property="delegate" destination="5Ur-99-ojf" id="C9F-vh-WIO"/>
                                 </connections>
                             </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFt-SL-ePf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="S4s-rw-T5s">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UW6-7l-YOI">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="ECY-XP-joy">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkX-pO-wjZ">
+                                <rect key="frame" x="20" y="113" width="335" height="440"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-hW-mgq">
+                                        <rect key="frame" x="20" y="20" width="295" height="295"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="295" id="CVN-Ix-Cxg"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2X2-Jf-Oba">
+                                        <rect key="frame" x="20" y="323" width="295" height="50"/>
+                                        <color key="backgroundColor" red="0.90685385470000002" green="0.3857226372" blue="0.28136545419999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="8uV-Ws-GSP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteButton:" destination="5Ur-99-ojf" eventType="touchUpInside" id="gzi-rv-h82"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SfA-wc-MpQ">
+                                        <rect key="frame" x="20" y="387.5" width="295" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="h1Z-YS-Dcq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="5Ur-99-ojf" eventType="touchUpInside" id="kDM-bq-yFS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="335" id="2BB-bk-QWx"/>
+                                    <constraint firstItem="2X2-Jf-Oba" firstAttribute="leading" secondItem="lkX-pO-wjZ" secondAttribute="leading" constant="20" id="5W9-a4-9Th"/>
+                                    <constraint firstAttribute="trailing" secondItem="SfA-wc-MpQ" secondAttribute="trailing" constant="20" id="Hdw-hl-b51"/>
+                                    <constraint firstItem="SfA-wc-MpQ" firstAttribute="leading" secondItem="lkX-pO-wjZ" secondAttribute="leading" constant="20" id="MgW-gh-nwq"/>
+                                    <constraint firstAttribute="trailing" secondItem="2X2-Jf-Oba" secondAttribute="trailing" constant="20" id="V3D-fC-oEj"/>
+                                    <constraint firstAttribute="height" constant="440" id="Ye7-t1-y5Z"/>
+                                    <constraint firstItem="2X2-Jf-Oba" firstAttribute="top" secondItem="Y2t-hW-mgq" secondAttribute="bottom" constant="8" id="Yxb-Y3-S4h"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y2t-hW-mgq" secondAttribute="trailing" constant="20" id="h8K-zQ-Ypq"/>
+                                    <constraint firstItem="Y2t-hW-mgq" firstAttribute="top" secondItem="lkX-pO-wjZ" secondAttribute="top" constant="20" id="rsM-sr-VXt"/>
+                                    <constraint firstItem="Y2t-hW-mgq" firstAttribute="leading" secondItem="lkX-pO-wjZ" secondAttribute="leading" constant="20" id="tGn-ZP-5R7"/>
+                                    <constraint firstItem="SfA-wc-MpQ" firstAttribute="top" secondItem="2X2-Jf-Oba" secondAttribute="bottom" constant="14.5" id="xBU-je-S4V"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="TFt-SL-ePf" firstAttribute="trailing" secondItem="3L4-Pp-JLN" secondAttribute="trailing" id="GbB-hI-YJT"/>
                             <constraint firstItem="55W-fZ-ODW" firstAttribute="leading" secondItem="3L4-Pp-JLN" secondAttribute="leading" id="Mda-dG-7zz"/>
                             <constraint firstItem="55W-fZ-ODW" firstAttribute="trailing" secondItem="3L4-Pp-JLN" secondAttribute="trailing" id="Uny-Ir-ChV"/>
+                            <constraint firstItem="lkX-pO-wjZ" firstAttribute="centerY" secondItem="Lwz-vB-wac" secondAttribute="centerY" id="ZHS-Wg-nnp"/>
+                            <constraint firstItem="TFt-SL-ePf" firstAttribute="leading" secondItem="3L4-Pp-JLN" secondAttribute="leading" id="dUp-dr-uN9"/>
                             <constraint firstItem="55W-fZ-ODW" firstAttribute="top" secondItem="3L4-Pp-JLN" secondAttribute="top" id="fgY-cS-CmY"/>
+                            <constraint firstItem="TFt-SL-ePf" firstAttribute="bottom" secondItem="3L4-Pp-JLN" secondAttribute="bottom" id="ifi-DC-cn6"/>
+                            <constraint firstItem="lkX-pO-wjZ" firstAttribute="centerX" secondItem="Lwz-vB-wac" secondAttribute="centerX" id="j2y-xA-n9L"/>
+                            <constraint firstItem="TFt-SL-ePf" firstAttribute="top" secondItem="Lwz-vB-wac" secondAttribute="top" id="nHg-bw-QoN"/>
                             <constraint firstItem="55W-fZ-ODW" firstAttribute="bottom" secondItem="3L4-Pp-JLN" secondAttribute="bottom" id="yii-fg-mS3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3L4-Pp-JLN"/>
@@ -128,7 +208,10 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="blur" destination="TFt-SL-ePf" id="5Mc-wH-EPL"/>
                         <outlet property="collectionView" destination="55W-fZ-ODW" id="8Gb-2n-EkE"/>
+                        <outlet property="deleteView" destination="lkX-pO-wjZ" id="e1s-px-P67"/>
+                        <outlet property="deleteViewImage" destination="Y2t-hW-mgq" id="Jnz-6Y-EVi"/>
                         <outlet property="segControl" destination="HCo-uk-jYX" id="vF1-2a-FvG"/>
                     </connections>
                 </viewController>
